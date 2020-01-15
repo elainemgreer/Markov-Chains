@@ -57,7 +57,6 @@ def make_chains(text_string):
             chains[(words[i], words[i + 1])].append(words[i + 2])
         except:
             continue
-
     return chains
 
 
@@ -66,10 +65,13 @@ def make_text(chains_dict):
 
     # link = list(chains_dict.keys())[0]
     # generated_sentence = [link[0], link[1]]
-    
+    upper_links = []
     # your code goes here
+    for chain in chains.keys():
+        if chain[0][0].isupper():
+            upper_links.append(chain)
 
-    link = choice(list(chains_dict.keys()))
+    link = choice(upper_links)
     generated_sentence = [link[0],link[1]]
 
 #loop starts
@@ -78,7 +80,6 @@ def make_text(chains_dict):
             
         link = (link[1], choice(chains_dict[link]))
         generated_sentence.append(link[1])
-        print(generated_sentence)
             
 
 
@@ -97,4 +98,5 @@ chains = make_chains(input_text)
 # Produce random text
 random_text = make_text(chains)
 
+make_chains("green-eggs.txt")
 print(random_text)
