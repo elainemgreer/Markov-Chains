@@ -50,28 +50,40 @@ def make_chains(text_string):
     chains = {}
 
     # your code goes here
-    words.append(None)
 
-    for i in range(len(words) - 2):
+    for i in range(len(words) - 1):
         chains[(words[i], words[i + 1])] = chains.get((words[i], words[i + 1]), [])
         try:
             chains[(words[i], words[i + 1])].append(words[i + 2])
         except:
             continue
 
-    print(chains)
-
     return chains
 
 
-def make_text(chains):
+def make_text(chains_dict):
     """Return text from chains."""
 
-    words = []
-
+    # link = list(chains_dict.keys())[0]
+    # generated_sentence = [link[0], link[1]]
+    
     # your code goes here
 
-    return " ".join(words)
+    link = choice(list(chains_dict.keys()))
+    generated_sentence = [link[0],link[1]]
+
+#loop starts
+    while chains[link]:
+        
+            
+        link = (link[1], choice(chains_dict[link]))
+        generated_sentence.append(link[1])
+        print(generated_sentence)
+            
+
+
+
+    return " ".join(generated_sentence)
 
 
 input_path = "green-eggs.txt"
