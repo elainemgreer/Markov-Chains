@@ -78,20 +78,20 @@ def make_text(chains_dict):
     punctuation_keys = []
     # your code goes here
     for chain in chains.keys():
-        if chain[1][-1] in string.punctuation:
-            punctuation_keys.append(chain)
-    print(punctuation_keys)        
+        if chain[1][-1] in string.punctuation and chain[1][-1] != ",":
+            punctuation_keys.append(chain)     
 
-    link = choice(upper_links)
-    generated_sentence = [link[0],link[1]]
+    end_link = choice(punctuation_keys)
 
 #loop starts
     while chains[link]:
-        
-            
-        link = (link[1], choice(chains_dict[link]))
-        generated_sentence.append(link[1])
-            
+        if link == end_link:
+            break
+
+        else:
+            link = (link[1], choice(chains_dict[link]))
+            generated_sentence.append(link[1])
+                
 
 
 
